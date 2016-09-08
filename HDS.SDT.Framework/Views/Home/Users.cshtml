@@ -1,0 +1,150 @@
+﻿@model HDS.SDT.Framework.Entities.GitHubUser
+@using HDS.SDT.Framework.Entities.Extensions
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+
+<div class="row">
+    <h4>GitHubUser</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            <strong>@Html.DisplayFor(model => model.name)</strong>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.avatar_url)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.avatar_url.StringToMediumIMG())
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.public_repos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.public_repos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GitHubUserRepos)
+        </dt>
+
+        <dd>
+            <div>
+                <dl>
+                    @foreach (var repo in Model.GitHubUserRepos)
+                    {
+                        <dt>
+                            Repo Name
+                        </dt>
+
+                        <dd>@repo.name</dd>
+
+                        <dt>Full Name</dt>
+
+                        <dd>@repo.full_name</dd>
+
+                        <dt>Description</dt>
+
+                        <dd>@repo.description</dd>
+
+                        <dt>Created</dt>
+
+                        <dd>@repo.created_at.DateToZulu()</dd>
+
+                        <dt>Last Updated</dt>
+
+                        <dd>@repo.updated_at.DateToZulu()</dd>
+
+                        <dt>Private?</dt>
+
+                        <dd>@repo.IsPrivate.BoolToYes()</dd>
+
+                        <dt>Repo Link</dt>
+
+                        <dd>@Html.Raw(repo.html_url.StringToURL())</dd>
+
+                        <dt>Owner</dt>
+
+                        <dd>
+                            <div>
+                                <dl>
+                                    <dt>Login</dt>
+
+                                    <dd>
+                                        @repo.owner.login
+                                    </dd>
+
+                                    <dt>Type</dt>
+
+                                    <dd>@repo.owner.type</dd>
+
+                                    <dt>Avatar</dt>
+
+                                    <dd>@Html.Raw(repo.owner.avatar_url.StringToSmallIMG())</dd>
+
+                                    <dt>Owner URL</dt>
+
+                                    <dd>@Html.Raw(repo.owner.html_url.StringToURL())</dd>
+                                </dl>
+                            </div>
+                        </dd>
+                    }
+                </dl>
+            </div>
+
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Search Again", "Index")
+    <a href="#" class="scrollToTop">
+        <i class="fa fa-angle-double-up" aria-hidden="true"></i><br />
+            Scroll To Top<br />
+        <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+    </a>
+
+</p>
